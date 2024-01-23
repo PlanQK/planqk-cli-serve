@@ -1,8 +1,10 @@
 import time
+from datetime import datetime
 import os
 from fastapi import BackgroundTasks, FastAPI, HTTPException
 
 from typing import Optional
+from app.helpers.date_formatter import format_timestamp
 from app.model.execution_input import ExecutionInput
 from app.model.execution_status import ExecutionStatus
 from app.model.job import Job
@@ -48,36 +50,45 @@ async def start_execution(input: ExecutionInput, background_tasks: BackgroundTas
     try:
         background_tasks.add_task(submit_execution, job_id, input.params, input.data)
 
-        job = Job(id = job_id, status = ExecutionStatus.IN_PROGRESS, createdAt = time.time())
+        job = Job(id = job_id, status = ExecutionStatus.PENDING, createdAt = format_timestamp(time.time()))
         jobs[job_id] = job
         return to_json(job)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @app.get('/{id}')
-def get_result(id):
+def get_execution_status(id):
     future = executions.get(id)
+    job = jobs.get(id)
+
+    if future is None or job is None :
+        raise HTTPException(status_code=404, detail="Execution does not exist")
+
     if future.done():
-        job = jobs.get(id)
         if job:
             job.status = ExecutionStatus.COMPLETED
-            jobs[id] = job
         else: 
-            jobs[id] = Job(id = id, status = ExecutionStatus.COMPLETED, createdAt = time.time())
-        return jobs.get(id)
-    return ("No process start for id: " + id)
+            job = Job(id = id, status = ExecutionStatus.COMPLETED, createdAt = format_timestamp(time.time()))
+        
+        jobs[id] = job
+        return to_json(job)
+
+    jobs[id] = Job(id = id, status = ExecutionStatus.IN_PROGRESS, createdAt = format_timestamp(time.time()))
+
+    return to_json(job)
 
 @app.get('/{id}/result')
 def get_result(id):
     future = executions.get(id)
+    if future is None:
+        raise HTTPException(status_code=404, detail="Execution does not exist")
+
     if future.done():
         response = future.result()
         return response
-    return None
+    return (f"Current execution status is: {to_json(ExecutionStatus.IN_PROGRESS)}") 
 
 @app.delete('/{id}/cancel')
 def get_result(id):
-    job = jobs[id]
     del jobs[id]
-
-    return job
+    del executions[id]

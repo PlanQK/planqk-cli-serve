@@ -5,4 +5,7 @@ from app.model.execution_status import ExecutionStatus
 class Job(BaseModel):
     id: str
     status: ExecutionStatus
-    createdAt: float
+    createdAt: str
+
+    class Config:  
+        use_enum_values = True
