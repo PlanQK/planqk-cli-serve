@@ -26,6 +26,10 @@ def get_status(id):
 def get_result(id):
     return get_execution_result(id)
 
+@app.get('/{id}/interim-results')
+def get_status(id):
+    return []
+
 @app.delete('/{id}/cancel')
 def delete(id):
     delete_execution(id)
