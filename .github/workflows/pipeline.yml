@@ -28,12 +28,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.path }}
+          images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/planqk-cli-serve
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ matrix.path }}
-          file: ${{ matrix.path }}/Dockerfile
+          context: planqk-cli-serve
+          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
