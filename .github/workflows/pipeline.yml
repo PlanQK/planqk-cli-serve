@@ -1,8 +1,6 @@
 name: pipeline
 
-on:
-  release:
-    types: [ published ]
+on: push
 
 env:
   REGISTRY: ghcr.io
