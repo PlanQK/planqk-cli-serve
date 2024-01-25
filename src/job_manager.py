@@ -18,12 +18,11 @@ def update_job_status(id, isDone):
             job.status = ExecutionStatus.COMPLETED
         else: 
             job = Job(id = id, status = ExecutionStatus.COMPLETED, createdAt = format_timestamp(time.time()))
-    elif not isDone and not job:
-        job = Job(id = id, status = ExecutionStatus.IN_PROGRESS, createdAt = format_timestamp(time.time()))
-    
+    elif not isDone and job:
+        job.status = ExecutionStatus.IN_PROGRESS
+
     jobs[id] = job
     return job
 
 def delete_job(id):
     del jobs[id]
-    

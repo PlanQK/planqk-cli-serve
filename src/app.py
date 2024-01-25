@@ -15,7 +15,6 @@ async def create(input: ExecutionInput, background_tasks: BackgroundTasks):
     id=str(uuid.uuid4())
     create_execution(id, input, background_tasks)
     return create_job(id)
-    
 
 @app.get('/{id}')
 def get_status(id):
