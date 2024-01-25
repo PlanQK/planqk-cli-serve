@@ -2,7 +2,6 @@ import time
 from datetime import datetime
 import os
 from fastapi import BackgroundTasks, FastAPI, HTTPException
-
 from typing import Optional
 from app.helpers.date_formatter import format_timestamp
 from app.model.execution_input import ExecutionInput
