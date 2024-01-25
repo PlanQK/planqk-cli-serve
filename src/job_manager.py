@@ -26,3 +26,4 @@ def update_job_status(id, isDone):
 
 def delete_job(id):
     del jobs[id]
+    

@@ -61,3 +61,4 @@ def get_execution_result(id):
 def delete_execution(id):
     delete_job(id)
     del executions[id]
+    

@@ -23,3 +23,4 @@ def get_result(id):
 @app.delete('/{id}/cancel')
 def delete(id):
     delete_execution(id)
+    
