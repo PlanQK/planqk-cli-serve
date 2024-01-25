@@ -8,7 +8,7 @@ Once the project has been built, the container can be started with the docker ru
 The following code snippet is an example of using the `docker run` command after navigating to the root directory of the project you want to execute:
 
 ```bash
-docker run -p 8001:8001 -v "$(pwd):/user_code" <tag>
+docker run -p 8001:8001 -v "$(pwd):/user_code" my_image:latest
 ```
 
 ## License
