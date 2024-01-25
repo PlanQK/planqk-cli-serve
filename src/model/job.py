@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from app.model.execution_status import ExecutionStatus
+from src.model.execution_status import ExecutionStatus
 
 class Job(BaseModel):
     id: str
