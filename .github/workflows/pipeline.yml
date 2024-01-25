@@ -15,15 +15,6 @@ jobs:
       # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
       contents: read
       packages: write
-    strategy:
-      matrix:
-        path:
-          - coding-templates/python/python-starter
-          - coding-templates/python/python-starter-dwave
-          - coding-templates/python/python-starter-ionq
-          - coding-templates/python/python-starter-aws
-          - coding-templates/docker/docker-go
-          - coding-templates/docker/docker-interim-results
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
