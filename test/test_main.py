@@ -12,7 +12,7 @@ client = TestClient(app)
 
 def test_health_check():
     response = client.get('/')
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {"status": "Service is up and running"}
 
 def test_create_with_string_dict_input_data():
