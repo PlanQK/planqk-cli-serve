@@ -49,7 +49,7 @@ def test_create_with_invalid_input_data():
     
 def test_get_status_throw_404_when_missing_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     # when
     response = client.get(f'/123')
@@ -58,7 +58,7 @@ def test_get_status_throw_404_when_missing_execution():
 
 def test_get_status_with_valid_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     input_data = {
         "data": {},
@@ -79,7 +79,7 @@ def test_get_status_with_valid_execution():
 
 def test_get_status_with_invalid_execution():
     # given
-    set_entry_point("test/test_user_code.invalid.src.program:run")
+    set_entry_point("test/user_code.invalid.src.program:run")
 
     input_data = {
         "data": {},
@@ -100,7 +100,7 @@ def test_get_status_with_invalid_execution():
 
 def test_get_result_throw_404_when_missing_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     # when
     response = client.get(f'/123/result')
@@ -109,7 +109,7 @@ def test_get_result_throw_404_when_missing_execution():
     
 def test_get_result_of_valid_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     input_data = {
         "data": {},
@@ -130,7 +130,7 @@ def test_get_result_of_valid_execution():
 
 def test_get_result_of_invalid_execution():
     # given
-    set_entry_point("test/test_user_code.invalid.src.program:run")
+    set_entry_point("test/user_code.invalid.src.program:run")
 
     input_data= {
         "data": {},
@@ -150,7 +150,7 @@ def test_get_result_of_invalid_execution():
 
 def test_delete_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     input_data = {
         "data": {},
@@ -177,7 +177,7 @@ def test_delete_execution():
     
 def test_delete_execution_throw_404_when_missing_execution():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     # when
     response = client.delete('/123/cancel')
@@ -187,7 +187,7 @@ def test_delete_execution_throw_404_when_missing_execution():
 
 def test_delete_execution_with_wrong_id():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     # when
     response = client.delete('/123/cancel')
@@ -197,7 +197,7 @@ def test_delete_execution_with_wrong_id():
     
 def test_get_interim_result():
     # given
-    set_entry_point("test/test_user_code.valid.src.program:run")
+    set_entry_point("test/user_code.valid.src.program:run")
 
     response = client.get(f'/{id}/interim-results')
     
