@@ -8,7 +8,7 @@ title="Service API",
     version="1.0",
 )
 
-with open('api-spec.json', 'r') as json_file:
+with open('src/statics/api-spec.json', 'r') as json_file:
     api_spec = json.load(json_file)
 
 
