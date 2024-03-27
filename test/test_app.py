@@ -148,7 +148,7 @@ def test_get_result_of_invalid_execution():
     # then
     assert response.status_code == 500
 
-def test_delete_execution():
+def test_remove_execution():
     # given
     set_entry_point("test/user_code.valid.src.program:run")
 
@@ -169,28 +169,28 @@ def test_delete_execution():
     assert response.json()['status'] == ExecutionStatus.RUNNING or response.json()['status'] == ExecutionStatus.SUCCEEDED
     
     # when
-    response = client.delete(f'/{id}/cancel')
+    response = client.put(f'/{id}/cancel')
     
     # then
     response = client.get(f'/{id}')
     assert response.status_code == 404
     
-def test_delete_execution_throw_404_when_missing_execution():
+def test_remove_execution_throw_404_when_missing_execution():
     # given
     set_entry_point("test/user_code.valid.src.program:run")
 
     # when
-    response = client.delete('/123/cancel')
+    response = client.put('/123/cancel')
     # then
     assert response.status_code == 404
     
 
-def test_delete_execution_with_wrong_id():
+def test_remove_execution_with_wrong_id():
     # given
     set_entry_point("test/user_code.valid.src.program:run")
 
     # when
-    response = client.delete('/123/cancel')
+    response = client.put('/123/cancel')
     
     # then
     assert response.status_code == 404
