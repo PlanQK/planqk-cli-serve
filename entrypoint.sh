@@ -9,7 +9,6 @@ elif [ -f dependencies.txt ] && ! cmp -s dependencies.txt /user_code/requirement
   cp /user_code/requirements.txt dependencies.txt
   pip3 uninstall -r /user_code/requirements.txt -y
   pip3 install -r /user_code/requirements.txt
-  exec "$@"
 else
   cp /user_code/requirements.txt dependencies.txt
   pip3 install -r /user_code/requirements.txt
