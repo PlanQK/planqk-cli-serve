@@ -5,14 +5,6 @@
     "description" : "Generic API description for a managed PlanQK Service.\n",
     "version" : "1.0"
   },
-  "servers" : [ {
-    "url" : "https://gateway.platform.planqk.de/df483da2-d630-4a84-b99f-01648c93f92c/random-number-with-sleep/1.0.0"
-  }, {
-    "url" : "http://gateway.platform.planqk.de/df483da2-d630-4a84-b99f-01648c93f92c/random-number-with-sleep/1.0.0"
-  } ],
-  "security" : [ {
-    "default" : [ ]
-  } ],
   "paths" : {
     "/" : {
       "get" : {
@@ -123,6 +115,9 @@
           "404" : {
             "description" : "Not found"
           },
+          "422" : {
+            "description" : "Unprocessable Content"
+          },
           "500" : {
             "description" : "Internal server error"
           }
@@ -194,6 +189,9 @@
           "404" : {
             "description" : "Not found"
           },
+          "422" : {
+            "description" : "Unprocessable Content"
+          },
           "500" : {
             "description" : "Internal server error"
           }
@@ -264,6 +262,9 @@
           "404" : {
             "description" : "Not found"
           },
+          "422" : {
+            "description" : "Unprocessable Content"
+          },
           "500" : {
             "description" : "Internal server error"
           }
@@ -326,6 +327,9 @@
           },
           "404" : {
             "description" : "Not found"
+          },
+          "422" : {
+            "description" : "Unprocessable Content"
           },
           "500" : {
             "description" : "Internal server error"
@@ -397,6 +401,9 @@
           },
           "404" : {
             "description" : "Not found"
+          },
+          "422" : {
+            "description" : "Unprocessable Content"
           },
           "500" : {
             "description" : "Internal server error"
