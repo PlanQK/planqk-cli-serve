@@ -28,12 +28,7 @@
               }
             }
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       },
       "post" : {
         "tags" : [ "Service API" ],
@@ -121,12 +116,7 @@
           "500" : {
             "description" : "Internal server error"
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       }
     },
     "/{id}" : {
@@ -195,12 +185,7 @@
           "500" : {
             "description" : "Internal server error"
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       }
     },
     "/{id}/result" : {
@@ -268,12 +253,7 @@
           "500" : {
             "description" : "Internal server error"
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       }
     },
     "/{id}/interim-results" : {
@@ -334,12 +314,7 @@
           "500" : {
             "description" : "Internal server error"
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       }
     },
     "/{id}/cancel" : {
@@ -408,12 +383,7 @@
           "500" : {
             "description" : "Internal server error"
           }
-        },
-        "security" : [ {
-          "default" : [ ]
-        } ],
-        "x-auth-type" : "Application & Application User",
-        "x-throttling-tier" : "Unlimited"
+        }
       }
     }
   }
