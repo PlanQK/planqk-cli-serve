@@ -1,0 +1,8 @@
+name: planqk-cli-serve
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - pip>=21.1.3
+  - pip:
+      - -r requirements.txt
