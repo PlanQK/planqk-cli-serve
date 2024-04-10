@@ -7,5 +7,5 @@ if [ -f dependencies.txt ] && cmp -s dependencies.txt /user_code/requirements.tx
   exec "$@"
 else
   cp /user_code/requirements.txt dependencies.txt
-  pip3 install -r /user_code/requirements.txt
+  pip install -r /user_code/requirements.txt
 fi
