@@ -1,16 +1,38 @@
-planqk-cli-serve
-==========
+# planqk-cli-serve
 
-The "serve" command is used in the PlanQK Command Line Interface (CLI). Its purpose is to help users to test their services locally.
+This project is the baseline for the PlanQK CLI command `serve`.
 
-Once the project has been built, the container can be started with the docker run command. For a proper start, the directory of the project you want to run should be mounted under the path `/user_code`.
+It runs a PlanQK project directory in a containerized environment to expose it through a local web server, similarly to how the PlanQK Platform would run the code.
+The local web server exposes the same RESTful HTTP endpoints to start a service execution, to check the status of running executions, to cancel executions, and to retrieve execution results.
 
-The following code snippet is an example of using the `docker run` command after navigating to the root directory of the project you want to execute:
+## Usage
+
+The container expects the project directory to be used mounted under the path `/user_code`.
+
+Build the container image:
 
 ```bash
-docker run -p 8001:8001 -v "$(pwd):/user_code" my_image:latest
+docker build -t planqk-cli-serve .
 ```
+
+Once the container image has been built, start it with the following command:
+
+```bash
+docker run -p 8000:8000 -v "$(pwd):/user_code" planqk-cli-serve
+```
+
+## Development
+
+We use FastAPI, to run the service locally, you can use the following command:
+
+```bash
+uvicorn src.app:app --reload
+```
+
+By default, the `user_code_runner` tries to executes the supplied test directory `user_code`.
+The implementation therein is the bare minimum a service needs to provide.
+In this case, the logic simply prints/logs the input data and params and returns it as is wrapped in a dictionary.
 
 ## License
 
-Apache-2.0 | Copyright 2023 Anaqor AG
+Apache-2.0 | Copyright 2023-2024 Anaqor AG
