@@ -18,7 +18,7 @@ docker build -t planqk-cli-serve .
 Once the container image has been built, start it with the following command:
 
 ```bash
-docker run -p 8000:8000 -v "$(pwd):/user_code" planqk-cli-serve
+docker run -it -e PORT=8000 -p 8000:8000 -v "$(pwd):/user_code" planqk-cli-serve standalone
 ```
 
 ## Development
