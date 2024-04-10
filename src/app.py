@@ -8,9 +8,8 @@ with open('src/statics/api-spec.json', 'r') as json_file:
     api_spec = json.load(json_file)
 
 app = FastAPI(
-title=api_spec['info']['title'],
-  version=api_spec['info']['version'],
-  description=api_spec['info']['description']
+  title="Local PlanQK Service",
+  version="1.0",
 )
 
 @app.get('/', summary="Health checking endpoint", tags=["Status API"], responses=api_spec['paths']['/']['get']['responses'])

@@ -97,24 +97,6 @@
                 }
               }
             }
-          },
-          "400" : {
-            "description" : "Invalid input"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not found"
-          },
-          "422" : {
-            "description" : "Unprocessable Content"
-          },
-          "500" : {
-            "description" : "Internal server error"
           }
         }
       }
@@ -169,21 +151,6 @@
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not found"
-          },
-          "422" : {
-            "description" : "Unprocessable Content"
-          },
-          "500" : {
-            "description" : "Internal server error"
           }
         }
       }
@@ -237,21 +204,6 @@
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not found"
-          },
-          "422" : {
-            "description" : "Unprocessable Content"
-          },
-          "500" : {
-            "description" : "Internal server error"
           }
         }
       }
@@ -298,21 +250,6 @@
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not found"
-          },
-          "422" : {
-            "description" : "Unprocessable Content"
-          },
-          "500" : {
-            "description" : "Internal server error"
           }
         }
       }
@@ -367,21 +304,6 @@
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not found"
-          },
-          "422" : {
-            "description" : "Unprocessable Content"
-          },
-          "500" : {
-            "description" : "Internal server error"
           }
         }
       }
