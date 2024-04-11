@@ -17,8 +17,8 @@ class TaskExecutor(concurrent.futures.ThreadPoolExecutor):
         Returns: 
             Void
     """
-    def submit(self, fn, params, data, key, is_done_callback):
-        future = super().submit(fn, params, data)
+    def submit(self, fn, params, data, entry_point, key, is_done_callback):
+        future = super().submit(fn, params, data, entry_point)
         future.add_done_callback(is_done_callback)
         self._futures[key] = future
 

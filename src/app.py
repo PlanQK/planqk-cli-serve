@@ -3,7 +3,7 @@ import os
 import sys
 from typing import List
 
-from fastapi import BackgroundTasks, FastAPI, Path, Query
+from fastapi import FastAPI, Path, Query
 from loguru import logger
 
 from src.execution_manager import create_execution, delete_execution, get_execution_result, get_execution_status
@@ -35,8 +35,8 @@ def health_check() -> HealthCheck:
           tags=["Service API"],
           summary="Asynchronous execution of the service",
           status_code=201)
-async def create(execution_input: ExecutionInput, background_tasks: BackgroundTasks) -> Job:
-    return create_execution(execution_input, background_tasks)
+async def create(execution_input: ExecutionInput) -> Job:
+    return create_execution(execution_input)
 
 
 @app.get('/{id}',

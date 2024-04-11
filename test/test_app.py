@@ -110,7 +110,7 @@ def test_get_result_throw_404_when_missing_execution():
 
 def test_get_result_of_valid_execution():
     # given
-    set_entry_point("test/user_code.valid.src.program:run")
+    set_entry_point("test.user_code.valid.src.program:run")
 
     input_data = {
         "data": {},

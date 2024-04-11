@@ -3,11 +3,11 @@ import traceback
 import uuid
 from typing import Optional
 
-from fastapi import BackgroundTasks
 from fastapi import HTTPException
 from loguru import logger
 
 from src.TaskExecutor import TaskExecutor
+from src.execute_user_code import execute_user_code
 from src.job_manager import create_job, delete_job, update_job_by_status
 from src.model.execution_input import ExecutionInput
 from src.model.execution_status import ExecutionStatus
@@ -32,33 +32,10 @@ def update_job(key, future):
     return update_job_by_status(key, executionStatus)
 
 
-def execute_user_code(input_data: Optional[dict], input_params: Optional[dict]) -> any:
-    entry_point = os.environ.get("ENTRY_POINT", "user_code.src.program:run")
-
-    if input_data is None:
-        input_data = dict()
-    if input_params is None:
-        input_params = dict()
-    entry_point_arguments = {"kwargs": {
-        "data": input_data,
-        "params": input_params,
-    }}
-
-    try:
-        return run_user_code(entry_point=entry_point, entry_point_arguments=entry_point_arguments)
-    except Exception as e:
-        logger.error(f"Error executing user code: {e}")
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"{str(e)}")
-
-
-def submit_execution(key, params, data):
-    executor.submit(execute_user_code, params, data, key, lambda f: update_job(key, f))
-
-
-def create_execution(input: ExecutionInput, background_tasks: BackgroundTasks):
+def create_execution(input: ExecutionInput):
     id = str(uuid.uuid4())
-    background_tasks.add_task(submit_execution, id, input.params, input.data)
+    entry_point = os.environ.get("ENTRY_POINT", "user_code.src.program:run")
+    executor.submit(execute_user_code, input.data, input.params, entry_point, id, lambda f: update_job(id, f))
     return create_job(id)
 
 
