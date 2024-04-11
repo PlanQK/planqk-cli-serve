@@ -29,7 +29,7 @@ We use FastAPI, to run the service locally, you can use the following command:
 uvicorn src.app:app --reload
 ```
 
-By default, the `user_code_runner` tries to executes the supplied test directory `user_code`.
+By default, the `user_code_runner` tries to execute the supplied test directory `user_code`.
 The implementation therein is the bare minimum a service needs to provide.
 In this case, the logic simply prints/logs the input data and params and returns it as is wrapped in a dictionary.
 
