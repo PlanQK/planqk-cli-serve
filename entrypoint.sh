@@ -4,8 +4,6 @@ set -eu
 set -o pipefail
 
 function main {
-  local path
-
   while [[ "${#}" != 0 ]]; do
     case "${1}" in
     standalone)
