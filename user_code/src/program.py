@@ -18,4 +18,4 @@ def run(**kwargs):
     logger.info("loguru - data: {}", data)
     logger.info("loguru - params: {}", params)
 
-    return {data: data, params: params}
+    return {"data": data, "params": params}
