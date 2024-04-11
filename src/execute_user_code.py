@@ -15,7 +15,6 @@ def execute_user_code(input_data: Optional[dict], input_params: Optional[dict], 
         "data": input_data,
         "params": input_params,
     }}
-
     try:
         return run_user_code(entry_point=entry_point, entry_point_arguments=entry_point_arguments)
     except Exception as e:
