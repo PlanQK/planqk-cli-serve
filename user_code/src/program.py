@@ -2,6 +2,8 @@ import logging
 
 from loguru import logger
 
+log = logging.getLogger(__name__)
+
 
 def run(**kwargs):
     data = kwargs.get('data', {})
@@ -10,8 +12,8 @@ def run(**kwargs):
     print("print - data: ", data)
     print("print - params: ", params)
 
-    logging.info("logging - data: {}", data)
-    logging.info("logging - params: {}", params)
+    log.info("logging - data: %s", data)
+    log.info("logging - params: %s", params)
 
     logger.info("loguru - data: {}", data)
     logger.info("loguru - params: {}", params)

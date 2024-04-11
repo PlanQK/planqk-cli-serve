@@ -1,8 +1,13 @@
+import logging
+import os
+import sys
 from typing import List
 
 from fastapi import BackgroundTasks, FastAPI, Path, Query
+from loguru import logger
 
 from src.execution_manager import create_execution, delete_execution, get_execution_result, get_execution_status
+from src.helpers.logging import LogHandler
 from src.model.execution_input import ExecutionInput
 from src.model.execution_output import ExecutionOutput
 from src.model.health_check import HealthCheck
@@ -12,6 +17,11 @@ app = FastAPI(
     title="Local PlanQK Service",
     version="1.0",
 )
+
+logging_level = os.environ.get("LOG_LEVEL", "DEBUG")
+logging.getLogger().handlers = [LogHandler()]
+logging.getLogger().setLevel(logging_level)
+logger.configure(handlers=[{"sink": sys.stdout, "level": logging_level}])
 
 
 @app.get('/',
