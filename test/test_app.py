@@ -1,5 +1,5 @@
 import os
-
+from busypie import wait, SECOND
 from fastapi.testclient import TestClient
 
 from src.app import app
@@ -123,6 +123,9 @@ def test_get_result_of_valid_execution():
     assert response.json()['status'] == ExecutionStatus.PENDING
     id = response.json()['id']
     assert id is not None
+    
+    wait().at_most(2, SECOND).until(lambda: has_job_finished(id))
+
     # when
     response = client.get(f'/{id}/result')
     # then
@@ -208,3 +211,8 @@ def test_get_interim_result():
     response = client.get(f'/{id}/interim-results')
 
     assert response.json() == []
+
+def has_job_finished(job_id):
+    response = client.get(f'/{job_id}/result')
+    job_status = response.json()['status']
+    return job_status == ExecutionStatus.FAILED or job_status == ExecutionStatus.SUCCEEDED or job_status == ExecutionStatus.CANCELLED
