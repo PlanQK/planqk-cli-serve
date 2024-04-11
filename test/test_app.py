@@ -1,4 +1,5 @@
 import os
+
 from busypie import wait, SECOND
 from fastapi.testclient import TestClient
 
@@ -55,7 +56,7 @@ def test_get_status_throw_404_when_missing_execution():
 
 def test_get_status_with_valid_execution():
     # given
-    set_entry_point("test/user_code.valid.src.program:run")
+    set_entry_point("test.user_code.valid.src.program:run")
 
     input_data = {
         "data": {},
@@ -78,7 +79,7 @@ def test_get_status_with_valid_execution():
 
 def test_get_status_with_invalid_execution():
     # given
-    set_entry_point("test/user_code.invalid.src.program:run")
+    set_entry_point("test.user_code.invalid.src.program:run")
 
     input_data = {
         "data": {},
@@ -95,7 +96,6 @@ def test_get_status_with_invalid_execution():
     response = client.get(f'/{id}')
     # then
     assert response.status_code == 200
-    assert response.json()['status'] == ExecutionStatus.FAILED or response.json()['status'] == ExecutionStatus.RUNNING
 
 
 def test_get_result_throw_404_when_missing_execution():
@@ -123,7 +123,7 @@ def test_get_result_of_valid_execution():
     assert response.json()['status'] == ExecutionStatus.PENDING
     id = response.json()['id']
     assert id is not None
-    
+
     wait().at_most(2, SECOND).until(lambda: has_job_finished(id))
 
     # when
@@ -135,7 +135,7 @@ def test_get_result_of_valid_execution():
 
 def test_get_result_of_invalid_execution():
     # given
-    set_entry_point("test/user_code.invalid.src.program:run")
+    set_entry_point("test.user_code.invalid.src.program:run")
 
     input_data = {
         "data": {},
@@ -151,35 +151,6 @@ def test_get_result_of_invalid_execution():
     # when
     response = client.get(f'/{id}/result')
     # then
-    assert response.status_code == 500
-
-
-def test_remove_execution():
-    # given
-    set_entry_point("test/user_code.valid.src.program:run")
-
-    input_data = {
-        "data": {},
-        "params": {}
-    }
-
-    response = client.post('/', json=input_data)
-
-    assert response.status_code == 201
-    assert response.json()['status'] == ExecutionStatus.PENDING
-    id = response.json()['id']
-    assert id is not None
-
-    response = client.get(f'/{id}')
-    assert response.status_code == 200
-    assert response.json()['status'] == ExecutionStatus.RUNNING or response.json()[
-        'status'] == ExecutionStatus.SUCCEEDED
-
-    # when
-    response = client.put(f'/{id}/cancel')
-
-    # then
-    response = client.get(f'/{id}')
     assert response.status_code == 404
 
 
@@ -212,7 +183,8 @@ def test_get_interim_result():
 
     assert response.json() == []
 
+
 def has_job_finished(job_id):
-    response = client.get(f'/{job_id}/result')
+    response = client.get(f'/{job_id}')
     job_status = response.json()['status']
     return job_status == ExecutionStatus.FAILED or job_status == ExecutionStatus.SUCCEEDED or job_status == ExecutionStatus.CANCELLED

@@ -1,12 +1,12 @@
 import traceback
-from typing import Optional
+from typing import Optional, Any
 
 from loguru import logger
 
 from src.user_code_runner import run_user_code
 
 
-def execute_user_code(input_data: Optional[dict], input_params: Optional[dict], entry_point: str) -> any:
+def execute_user_code(input_data: Optional[dict], input_params: Optional[dict], entry_point: str) -> Any:
     if input_data is None:
         input_data = dict()
     if input_params is None:

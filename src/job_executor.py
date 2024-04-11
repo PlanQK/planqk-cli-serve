@@ -1,5 +1,6 @@
 import os
 from concurrent.futures import ThreadPoolExecutor
+from typing import Dict
 
 from fastapi import HTTPException
 
@@ -11,7 +12,7 @@ from src.model.job import Job
 
 class JobExecutor:
     def __init__(self):
-        self.jobs = {}
+        self.jobs: Dict[str, JobState] = {}
         self.executor = ThreadPoolExecutor(max_workers=3)
 
     def create_job(self, job_id: str, execution_input: ExecutionInput) -> None:

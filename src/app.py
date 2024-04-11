@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import sys
@@ -5,7 +6,7 @@ import time
 import uuid
 from typing import List
 
-from fastapi import FastAPI, Path, Query, BackgroundTasks
+from fastapi import FastAPI, Path, Query, BackgroundTasks, Response
 from loguru import logger
 
 from src.helpers.date_formatter import format_timestamp
@@ -56,9 +57,12 @@ def get_job_status(job_id: str = Path(alias="id", description="The ID of a certa
 
 @app.get('/{id}/result',
          tags=["Service API"],
-         summary="Get the result of an execution")
-def get_job_result(job_id: str = Path(alias="id", description="The ID of a certain execution")) -> ExecutionOutput:
-    return job_executor.get_job_result(job_id)
+         summary="Get the result of an execution",
+         response_model=ExecutionOutput)
+def get_job_result(job_id: str = Path(alias="id", description="The ID of a certain execution")):
+    result = job_executor.get_job_result(job_id)
+    content = json.dumps(result, default=lambda o: getattr(o, "__dict__", str(o)), sort_keys=True, indent=2)
+    return Response(content=content, media_type="application/json")
 
 
 @app.get('/{id}/interim-results',

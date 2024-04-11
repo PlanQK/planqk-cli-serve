@@ -20,12 +20,12 @@ class JobState:
         return self.future.done()
 
     def get_status(self) -> Job:
-        if self.future.done():
-            status = ExecutionStatus.SUCCEEDED
+        if self.future.exception() is not None:
+            status = ExecutionStatus.FAILED
         elif self.future.cancelled():
             status = ExecutionStatus.CANCELLED
-        elif self.future.exception() is not None:
-            status = ExecutionStatus.FAILED
+        elif self.future.done():
+            status = ExecutionStatus.SUCCEEDED
         else:
             status = ExecutionStatus.RUNNING
 
@@ -38,6 +38,9 @@ class JobState:
         )
 
     def get_result(self) -> ExecutionOutput | None:
+        if self.future.exception() is not None:
+            return None
+
         if self.has_finished():
             return self.future.result()
         return None
