@@ -1,7 +1,8 @@
-from typing import Dict
+from typing import Dict, Any, Optional
+
 from pydantic import BaseModel
 
+
 class ExecutionInput(BaseModel):
-    data: Dict[str, object]
-    params: Dict[str, object]
-    
+    data: Optional[Dict[str, Any]]
+    params: Optional[Dict[str, Any]]
