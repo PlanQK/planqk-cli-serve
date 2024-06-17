@@ -1,3 +1,9 @@
+# PROJECT MOVED TO GITLAB
+
+**NOTICE:** This project is no longer maintained on GitHub. It has been moved to GitLab for continued updates and development. You can find the latest version of this project at [https://gitlab.com/planqk-foss/planqk-cli-serve](https://gitlab.com/planqk-foss/planqk-cli-serve).
+
+---
+
 # planqk-cli-serve
 
 This project is the baseline for the PlanQK CLI command `serve`.
